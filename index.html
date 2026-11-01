@@ -1,0 +1,577 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarun | The Ultimate Birthday</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Trebuchet MS', sans-serif;
+  color: white;
+  text-align: center;
+  background: linear-gradient(135deg,#21104d,#7135a5,#ef5794,#ffad50);
+  background-attachment: fixed;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding: 13px 8px;
+  background: rgba(25,10,55,.88);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 9px 12px;
+  border-radius: 25px;
+  background: rgba(255,255,255,.13);
+}
+
+section {
+  min-height: 75vh;
+  padding: 75px 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero {
+  min-height: 100vh;
+}
+
+.card {
+  width: 100%;
+  max-width: 720px;
+  padding: 35px 22px;
+  border-radius: 28px;
+  background: rgba(255,255,255,.13);
+  border: 1px solid rgba(255,255,255,.4);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 15px 45px #0003;
+}
+
+h1 {
+  font-size: clamp(2.5rem,9vw,5rem);
+  text-shadow: 0 5px 20px #0004;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+p {
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+button {
+  border: none;
+  border-radius: 35px;
+  padding: 14px 23px;
+  margin: 9px;
+  background: white;
+  color: #b52e86;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .25s;
+}
+
+button:hover {
+  transform: scale(1.07);
+}
+
+.emoji {
+  font-size: 65px;
+}
+
+.gift {
+  font-size: 115px;
+  cursor: pointer;
+  transition: .4s;
+}
+
+.gift:hover {
+  transform: rotate(-12deg) scale(1.15);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.reveal {
+  animation: reveal 1s ease;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.photo-card {
+  position: relative;
+  min-width: 0;
+}
+
+.gallery img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 15px;
+  border: 3px solid white;
+}
+
+.remove {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #ed3970;
+  color: white;
+  padding: 8px 12px;
+  margin: 0;
+}
+
+.upload {
+  display: inline-block;
+  background: white;
+  color: #b52e86;
+  padding: 14px 23px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+input[type=file] {
+  display: none;
+}
+
+#fireworks {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 15;
+}
+
+footer {
+  padding: 35px;
+  background: rgba(20,5,40,.5);
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes bounce {
+  50% { transform: translateY(-15px); }
+}
+
+@media(max-width:450px) {
+  .gallery img { height: 140px; }
+  nav a { font-size: 11px; padding: 8px; }
+  .card { padding: 28px 15px; }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="fireworks"></canvas>
+
+<!-- NAVIGATION -->
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#gift">Gift</a>
+  <a href="#memories">Memories</a>
+  <a href="#letter">Letter</a>
+  <a href="#music">Music</a>
+  <a href="#final">Finale</a>
+</nav>
+
+<!-- HOME -->
+
+<section class="hero" id="home">
+  <div class="card reveal">
+    <div class="emoji">🎈🎉🎈</div>
+
+    <p>A SPECIAL CELEBRATION PRESENTS...</p>
+
+    <h1>HAPPY<br>BIRTHDAY!</h1>
+
+    <h2> TARUN ❤️</h2>
+
+    <div class="emoji" style="animation:bounce 2s infinite">
+      🎂
+    </div>
+
+    <p>
+      Today is all about you.
+      Get ready for an unforgettable celebration!
+    </p>
+
+    <button onclick="begin()">ENTER THE CELEBRATION 🚀</button>
+  </div>
+</section>
+
+<!-- GIFT -->
+
+<section id="gift">
+  <div class="card">
+    <h2>🎁 YOUR SPECIAL GIFT</h2>
+
+    <p>Something special is waiting for you...</p>
+
+    <div class="gift" onclick="openGift()">🎁</div>
+
+    <div id="giftReveal" class="hidden">
+      <h1> SURPRISE! 🎉</h1>
+      <p>
+        Your gift is a reminder that you deserve
+        happiness, success and countless amazing
+        moments in life!
+      </p>
+      <div class="emoji">🎊❤️🎊</div>
+    </div>
+
+    <p>Tap the gift box to open it!</p>
+  </div>
+</section>
+
+<!-- MEMORIES -->
+
+<section id="memories">
+  <div class="card">
+    <h2>📸 FRIENDSHIP MEMORIES</h2>
+
+    <p>
+      Every great friendship has a story.
+      Let's fill this wall with memories!
+    </p>
+
+    <label class="upload">
+      + ADD PHOTOS
+      <input type="file" id="photos"
+             accept="image/*" multiple>
+    </label>
+
+    <div class="gallery" id="gallery"></div>
+
+    <p style="font-size:13px">
+      You can remove unwanted pictures using their
+      individual remove buttons.
+    </p>
+  </div>
+</section>
+
+<!-- LETTER -->
+
+<section id="letter">
+  <div class="card">
+    <h2>💌 A MESSAGE FOR TARUN</h2>
+
+    <p>A little something from Sagar...</p>
+
+    <button onclick="openLetter()">
+      READ YOUR LETTER ❤️
+    </button>
+
+    <div id="letterReveal" class="hidden">
+      <h2>Dear Tarun,</h2>
+
+      <p>
+        Happy Birthday! 🎂
+        <br><br>
+        May your life be filled with happiness,
+        success, laughter and unforgettable memories.
+        <br><br>
+        Thanks for being a wonderful friend.
+        I hope we make many more memories,
+        share countless laughs and enjoy
+        every adventure together.
+        <br><br>
+        Never stop smiling and keep chasing
+        your dreams!
+        <br><br>
+        Happy Birthday once again!
+        <br><br>
+        Your friend,<br>
+        Sagar ❤️
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- MUSIC -->
+
+<section id="music">
+  <div class="card">
+    <h2>🎵 THE BIRTHDAY SOUNDTRACK</h2>
+
+    <p>Every celebration needs music!</p>
+
+    <audio id="song" controls loop>
+      <source src="birthday-song.mp3" type="audio/mpeg">
+    </audio>
+
+    <p style="font-size:13px">
+      Make sure birthday-song.mp3 is in the same
+      folder as this HTML file.
+    </p>
+  </div>
+</section>
+
+<!-- FINALE -->
+
+<section id="final">
+  <div class="card">
+    <div class="emoji">🥳🎆🥳</div>
+
+    <h1>THE GRAND FINALE</h1>
+
+    <h2>HAPPY BIRTHDAY TARUN!</h2>
+
+    <div style="font-size:85px">🎂</div>
+
+    <p>
+      May this year be your best chapter yet.
+      Here's to friendship, laughter and new adventures!
+    </p>
+
+    <button onclick="startFireworks()">
+      LAUNCH FIREWORKS 🎆
+    </button>
+
+    <button onclick="celebrate()">
+      MORE CONFETTI 🎊
+    </button>
+
+    <p id="finalMessage" class="hidden">
+      THE CELEBRATION IS YOURS, TARUN! ❤️
+    </p>
+  </div>
+</section>
+
+<footer>
+  Made with ❤️ by Sagar
+  <br>
+  TARUN BIRTHDAY PROJECT | VERSION 3.0
+  <br>
+  <p>🎈 Keep smiling. Keep shining. 🎈</p>
+</footer>
+
+<script>
+
+// WELCOME
+
+function begin() {
+  celebrate();
+  document.getElementById("home").scrollIntoView({
+    behavior:"smooth"
+  });
+}
+
+// GIFT
+
+function openGift() {
+  document.getElementById("giftReveal")
+    .classList.remove("hidden");
+
+  document.getElementById("giftReveal")
+    .classList.add("reveal");
+
+  celebrate();
+}
+
+// LETTER
+
+function openLetter() {
+  const letter = document.getElementById("letterReveal");
+  letter.classList.remove("hidden");
+  letter.classList.add("reveal");
+}
+
+// PHOTO GALLERY WITH REMOVE BUTTONS
+
+document.getElementById("photos").addEventListener(
+  "change", function(event) {
+
+    const gallery = document.getElementById("gallery");
+
+    Array.from(event.target.files).forEach(file => {
+
+      if (!file.type.startsWith("image/")) return;
+
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "photo-card";
+
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        img.alt = "Friendship memory";
+
+        const remove = document.createElement("button");
+        remove.className = "remove";
+        remove.textContent = "✕";
+
+        remove.onclick = () => wrapper.remove();
+
+        wrapper.appendChild(img);
+        wrapper.appendChild(remove);
+
+        gallery.appendChild(wrapper);
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+    event.target.value = "";
+  }
+);
+
+// CONFETTI
+
+let confetti = [];
+
+function celebrate() {
+
+  for(let i=0;i<180;i++) {
+    confetti.push({
+      x:Math.random()*window.innerWidth,
+      y:-20,
+      size:Math.random()*8+3,
+      speed:Math.random()*5+2,
+      color:`hsl(${Math.random()*360},100%,60%)`
+    });
+  }
+}
+
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+resize();
+window.addEventListener("resize",resize);
+
+let fireworks = [];
+
+function launch(x,y) {
+
+  const colors = [
+    "#ffdd55","#ff5e9c","#55eaff",
+    "#aaff66","#ffffff","#d58aff"
+  ];
+
+  const color = colors[
+    Math.floor(Math.random()*colors.length)
+  ];
+
+  for(let i=0;i<65;i++) {
+
+    const angle = Math.random()*Math.PI*2;
+    const speed = Math.random()*5+1.5;
+
+    fireworks.push({
+      x:x,
+      y:y,
+      vx:Math.cos(angle)*speed,
+      vy:Math.sin(angle)*speed,
+      life:65,
+      color:color,
+      size:Math.random()*3+2
+    });
+  }
+}
+
+function startFireworks() {
+
+  launch(canvas.width*.5,canvas.height*.3);
+  launch(canvas.width*.25,canvas.height*.4);
+  launch(canvas.width*.75,canvas.height*.4);
+
+  document.getElementById("finalMessage")
+    .classList.remove("hidden");
+
+  celebrate();
+}
+
+// ANIMATION LOOP
+
+function animate() {
+
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  confetti.forEach(p=>{
+    ctx.fillStyle=p.color;
+    ctx.fillRect(p.x,p.y,p.size,p.size);
+    p.y+=p.speed;
+    p.x+=Math.sin(p.y/20);
+  });
+
+  confetti=confetti.filter(p=>p.y<canvas.height+20);
+
+  fireworks.forEach(p=>{
+
+    ctx.globalAlpha = Math.max(0,p.life/65);
+    ctx.fillStyle=p.color;
+
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fill();
+
+    p.x+=p.vx;
+    p.y+=p.vy;
+    p.vy+=0.045;
+    p.vx*=0.985;
+    p.vy*=0.985;
+    p.life--;
+
+  });
+
+  ctx.globalAlpha=1;
+
+  fireworks=fireworks.filter(p=>p.life>0);
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+</script>
+
+</body>
+</html>
+
